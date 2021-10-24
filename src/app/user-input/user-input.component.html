@@ -1,0 +1,31 @@
+<section>
+    <div class="input">
+        Username:
+        <input type="email"
+               nzSize="large"
+               nz-input
+               [(ngModel)]="value.email"
+               placeholder="Email" />
+    </div>
+    <div class="input">
+        Password
+        <input type="password"
+               nzSize="large"
+               nz-input
+               [(ngModel)]="value.password"
+               placeholder="Password" />
+    </div>
+    <div class="input">
+        User Type
+        <nz-select nzShowSearch
+                   nzAllowClear
+                   nzSize="large"
+                   nzPlaceHolder="Select a person"
+                   [(ngModel)]="value.userType">
+            <ng-container *ngFor="let role of ROLES">
+                <nz-option [nzLabel]="role.key"
+                           [nzValue]="role.value"></nz-option>
+            </ng-container>
+        </nz-select>
+    </div>
+</section>

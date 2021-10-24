@@ -1,0 +1,43 @@
+<div class="section-container">
+    <div class="section">
+        <div class="title">
+            <nz-divider nzText="Login"></nz-divider>
+        </div>
+        <form nz-form
+              [formGroup]="loginForm"
+              class="login-form"
+              (ngSubmit)="login()">
+            <nz-form-item>
+                <nz-form-control nzErrorTip="Please input your email!"
+                                 [nzErrorTip]="emailErrorTmpl">
+                    <ng-template #emailErrorTmpl
+                                 let-control>
+                        <ng-container *ngIf="control.hasError('required')">Please input your username!</ng-container>
+                        <ng-container *ngIf="control.hasError('email')">Email is not valid</ng-container>
+                    </ng-template>
+                    <nz-input-group nzPrefixIcon="user">
+                        <input type="text"
+                               nzSize="large"
+                               nz-input
+                               formControlName="email"
+                               placeholder="Email" />
+                    </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control>
+                    <nz-input-group nzPrefixIcon="lock">
+                        <input type="password"
+                               nz-input
+                               nzSize="large"
+                               formControlName="password"
+                               placeholder="Password" />
+                    </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+            <button nz-button
+                    class="login-form-button login-form-margin"
+                    [nzType]="'primary'">Log in</button>
+        </form>
+    </div>
+</div>
