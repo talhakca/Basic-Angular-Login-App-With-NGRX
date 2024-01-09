@@ -1,0 +1,43 @@
+<nz-table #basicTable
+          [nzData]="userData">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>User Type</th>
+            <th *ngIf="canUserPerformCRUDOperations()">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of basicTable.data; let i = index">
+            <td>{{user.email}}</td>
+            <td>{{user.userType}}</td>
+            <td *ngIf="canUserPerformCRUDOperations()">
+                <a (click)="openAddUserModal()">Add New User</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a (click)="openEditUserModal(user,i)">Edit User</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a (click)="deleteUser(i)"> Delete User</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<!-- ADD MODAL -->
+<nz-modal [(nzVisible)]="isAddUserModalVisible"
+          nzTitle="Add User"
+          (nzOnCancel)="onAddUserCancel()"
+          (nzOnOk)="onAddUser()">
+    <ng-container *nzModalContent>
+        <app-user-input [(ngModel)]="newUser"></app-user-input>
+    </ng-container>
+</nz-modal>
+
+<!-- EDIT MODAL -->
+<nz-modal [(nzVisible)]="isEditUserModalVisible"
+          nzTitle="Edit User"
+          (nzOnCancel)="onEditUserCancel()"
+          (nzOnOk)="onEditUser()">
+    <ng-container *nzModalContent>
+        <app-user-input [(ngModel)]="editedUser"></app-user-input>
+    </ng-container>
+</nz-modal>
